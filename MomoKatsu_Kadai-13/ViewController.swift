@@ -10,8 +10,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     // 構造体を設定
     struct ItemValue {
-        var selectName: String
-        var selectCheck: Bool
+        var name: String
+        var check: Bool
     }
     // 表示する値を構造体で設定
     var selectItems:[ItemValue] = []
@@ -24,11 +24,13 @@ class ViewController: UIViewController, UITableViewDataSource {
         //cell.imageView!.image = nil
         // チェックマークを"true"の場合付ける
         // "nil"では、空白とならないため空白のファイルを作成し貼り付ける様にした
-        cell.imageView!.image = UIImage(named: "nocheck")
-        if selectItems[indexPath.row].selectCheck == true {
+        if selectItems[indexPath.row].check {
             cell.imageView!.image = UIImage(named: "check")
+        } else {
+            cell.imageView!.image = UIImage(named: "nocheck")
         }
-        cell.textLabel!.text = selectItems[indexPath.row].selectName
+
+        cell.textLabel!.text = selectItems[indexPath.row].name
         return cell
     }
     // テーブルビューに表示するデータ個数を返すメソッド
@@ -37,21 +39,14 @@ class ViewController: UIViewController, UITableViewDataSource {
         return selectItems.count
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // テーブルビュー表示内容
         selectItems = [
-            ItemValue(selectName: "りんご", selectCheck: false),
-            ItemValue(selectName: "みかん", selectCheck: true),
-            ItemValue(selectName: "バナナ", selectCheck: false),
-            ItemValue(selectName: "パイナップル", selectCheck: true),
+            ItemValue(name: "りんご", check: false),
+            ItemValue(name: "みかん", check: true),
+            ItemValue(name: "バナナ", check: false),
+            ItemValue(name: "パイナップル", check: true),
         ]
     }
-
-
 }
-
